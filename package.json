@@ -1,0 +1,33 @@
+{
+    "name": "asksuite-crawler",
+    "version": "1.0.0",
+    "description": "Develop the robot design that searches for prices in time real",
+    "main": "./api/index.js",
+    "scripts": {
+      "start": "nodemon index.js",
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/sabrinaa0408/asksuite-crawler.git"
+    },
+    "keywords": [
+      "crawler",
+      "asksuite"
+    ],
+    "author": "Sabrina da Silva Pereira <sabrina.silva16@outlook.com>",
+    "license": "MIT",
+    "bugs": {
+      "url": "https://github.com/sabrinaa0408/asksuite-crawler/issues"
+    },
+    "homepage": "https://github.com/sabrinaa0408/asksuite-crawler#readme",
+    "dependencies": {
+      "body-parser": "^1.19.0",
+      "cheerio": "^1.0.0-rc.9",
+      "express": "^4.17.1",
+      "moment": "^2.29.1",
+      "nodemon": "^2.0.7",
+      "puppeteer": "^9.1.1"
+    }
+  }
+  
