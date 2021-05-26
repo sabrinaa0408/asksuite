@@ -1,8 +1,8 @@
 const { crawler } = require('../config');
 const puppeteer = require('puppeteer');
-const helpers = require('../helpers');
 const qs = require('querystring');
 const cheerio = require('cheerio');
+const helpers = require('../helpers');
 
 
 const validators = require('../validators');
@@ -20,43 +20,43 @@ buscaSite = async (baseUrl, params) => {
     return html;
 }
 
-anaisarSite = (body) => {
-    let response = {acessível: []};
+analisarSite = (body) => {
+    let response = {disponivel: []};
     const $ = cheerio.load(body);
     $('tr.roomName').each((index, elem) => {
         let room = {};
         $elem = cheerio.load(elem);
         
         let imageURL = $elem('.roomSlider').find('.slide').not('.bx-clone').find('img').attr('src');
-        if (helpers.caminho(imageURL)){
+        if (helpers.relativeURLPathCheck(imageURL)){
             imageURL = crawler.website + imageURL;
         }
         room.imageURL = imageURL;
 
         const $descricao = $elem('.excerpt');
-        room.name = $descricao.find('h5 > a').html();
-        room.preco = $elem('h6.bestPriceTextColor').html();
+        room.nome = $descricao.find('h5 > a').html();
         room.descricao = $descricao.find('p > a').html();
+        room.preco = $elem('h6.bestPriceTextColor').html();
 
-        response.acessível.push(room);
+        response.disponivel.push(room);
     });
     return response;
 }
 
 const buscar = {
     webCrawler: (req, res) => {
-        const validacao = validators.validateBuscar(req);
-        if (!validacao.isValid) {
+        const validation = validators.validateBuscar(req);
+        if (!validation.isValid) {
             res.status(400).send({
-                err: validacao
+                err: validation
             });
             return;
         }
         let params = crawler.fixedParams;
-        params.CheckIn = req.body.checkin.replace(new RegExp('/', 'g'), ''); // remove /
-        params.CheckOut = req.body.checkout.replace(new RegExp('/', 'g'), ''); // remove /
+        params.CheckIn = req.body.checkin.replace(new RegExp('/', 'g'), ''); 
+        params.CheckOut = req.body.checkout.replace(new RegExp('/', 'g'), ''); 
         buscaSite(crawler.website, params).then((html) => {
-            res.status(200).send(anaisarSite(html));
+            res.status(200).send(analisarSite(html));
         }).catch((err) => {
             res.status(408).send({err: err});
         });

@@ -14,5 +14,5 @@ app.use('/', router);
 
 
 app.listen(config.server.port, function () {
-  console.log('Crawler rodando!');
+  console.log('Crawler asksuite rodando!');
 });

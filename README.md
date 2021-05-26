@@ -20,7 +20,7 @@ Develop the robot design that searches for prices in time real
 request.body:
 {
     "checkin": "22/06/2021",
-    "checkout": "28/06/2021"
+    "checkout": "25/06/2021"
 }
 
 OBS: Fazendo alguns testes tive alguns problemas com a escolha das datas, é importante validar se a data do checkin e menor do que

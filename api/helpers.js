@@ -1,5 +1,5 @@
 module.exports = {
-    caminho: (urlString) => {
+    relativeURLPathCheck: (urlString) => {
         var pat = /^https?:\/\//i;
         if (pat.test(urlString)) {
             return false;

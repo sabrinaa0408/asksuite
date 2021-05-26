@@ -6,19 +6,19 @@ module.exports = {
         const checkout = moment(req.body.checkout, "DD/MM/YYYY");
 
         let validacao = {
-            name: 'Inválida',
-            valido: false
+            nome: 'Invalido',
+            isValid: false
+        }
+        if (!checkin.isValid() || !checkout.isValid()){
+            validacao.message = 'Parâmetro obrigatório não existe ou incorreto';
+        } else if (!moment().isBefore(checkin)) {
+            validacao.message = 'O check-in deve ser definido para uma data futura!'
+        }else if(!checkin.isBefore(checkout)){
+            validacao.message = 'O check-out deve ser após o check-in';
+        } else {
+            validacao.isValid = true;
         }
         
-        if (!checkin.valido() || !checkout.valido()){
-            validacao.message = 'Parâmetro obrigatorio ou incorreto!';
-        } else if (!checkin.isBefore(checkout)){
-            validacao.message = 'Checkout deve ser após o Checkin';
-        }else if(!moment().isBefore(checkin)) {
-            validacao.message = 'Checkin deve ser uma data futura!'
-        } else {
-            validacao.valido = true;
-        }
         return validacao;
     }
 }

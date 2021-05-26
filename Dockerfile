@@ -15,7 +15,7 @@ EXPOSE 3000
 COPY package.json ./
 RUN npm install --quiet
 
-COPY server ./server
+COPY api ./api
 CMD ["npm", "start"]
 
 USER node
